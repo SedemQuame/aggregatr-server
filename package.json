@@ -1,0 +1,32 @@
+{
+  "name": "aggregator-server",
+  "version": "1.0.0",
+  "description": "Aggregation news application server, from MongoDb application.",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SedemQuame/aggregatr-server.git"
+  },
+  "keywords": [
+    "server",
+    "aggregatr",
+    "news"
+  ],
+  "author": "SedemQuame",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SedemQuame/aggregatr-server/issues"
+  },
+  "homepage": "https://github.com/SedemQuame/aggregatr-server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.15",
+    "passport-local-mongoose": "^6.1.0"
+  }
+}
