@@ -9,7 +9,7 @@ const articleSchema = new mongoose.Schema({
     category: { type: String },
     author: { type: String },
     storyDate: { type: String },
-    paragraphs: { type: String },
+    paragraphs: [],
     image: { type: String }
 });
 
