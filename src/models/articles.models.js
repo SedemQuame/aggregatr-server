@@ -1,5 +1,6 @@
 // ===================================== requiring node modules ===================================== //
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 // ==================================== document schema=======================================//
@@ -13,6 +14,7 @@ const articleSchema = new mongoose.Schema({
     image: { type: String }
 });
 
+articleSchema.plugin(mongoosePaginate);
 articleSchema.plugin(passportLocalMongoose);
 
 // ==================================== creating schema model =========================================//

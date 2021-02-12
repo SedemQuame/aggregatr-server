@@ -1,7 +1,9 @@
 const articles = require(`./../models/articles.models`);
 
 exports.all = (req, res) => {
-    articles.find({}).then((docs) => {
+    pagination_page = req.query.page || 0;
+    pagination_limit = req.query.limit || 20;
+    articles.paginate({}, { offset: (pagination_page * 1), limit: pagination_limit}).then((docs) => {
         console.log(docs)
         res.status(200).send({
             articles: docs,
