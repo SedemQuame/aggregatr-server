@@ -1,10 +1,10 @@
 const articles = require(`./../models/articles.models`);
 
 exports.all = (req, res) => {
-    pagination_page = req.query.page || 0;
-    pagination_limit = req.query.limit || 20;
-    articles.paginate({}, { offset: (pagination_page * 1), limit: pagination_limit}).then((docs) => {
-        console.log(docs)
+    let pagination_page = parseInt(req.query.page) || 0;
+    let pagination_limit = parseInt(req.query.limit) || 20;
+
+    articles.paginate({}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((docs) => {
         res.status(200).send({
             articles: docs,
             err: null,
@@ -20,10 +20,13 @@ exports.all = (req, res) => {
 };
 
 exports.get_category = (req, res) => {
-    pagination_page = req.query.page || 0;
-    pagination_limit = req.query.limit || 20;
-    articles.paginate({category: req.params.category}, { offset: (pagination_page * 1), limit: pagination_limit}).then((docs) => {
-    // articles.find().then(docs => {
+    let pagination_page = req.query.page || 0;
+    let pagination_limit = req.query.limit || 20;
+    articles.paginate({category: req.params.category}, {
+        offset: (pagination_page * 1),
+        limit: pagination_limit
+    }).then((docs) => {
+        // articles.find().then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
@@ -39,10 +42,13 @@ exports.get_category = (req, res) => {
 };
 
 exports.search = (req, res) => {
-    pagination_page = req.query.page || 0;
-    pagination_limit = req.query.limit || 20;
-    articles.paginate({title: req.params.term}, { offset: (pagination_page * 1), limit: pagination_limit}).then((docs) => {
-    // articles.find({title: req.params.term}).then(docs => {
+    let pagination_page = req.query.page || 0;
+    let pagination_limit = req.query.limit || 20;
+    articles.paginate({title: req.params.term}, {
+        offset: (pagination_page * 1),
+        limit: pagination_limit
+    }).then((docs) => {
+        // articles.find({title: req.params.term}).then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
