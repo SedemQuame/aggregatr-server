@@ -11,8 +11,6 @@ exports.all = (req, res) => {
             msg: null,
         });
     }).catch(err => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.status(404).send({
             articles: null,
             err,
@@ -29,8 +27,6 @@ exports.get_category = (req, res) => {
             msg: null,
         });
     }).catch(err => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.status(404).send({
             articles: null,
             err,
@@ -47,8 +43,6 @@ exports.search = (req, res) => {
             msg: null,
         });
     }).catch(err => {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         res.status(404).send({
             articles: null,
             err,

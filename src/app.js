@@ -44,6 +44,13 @@ const connectDB = () => {
 };
 connectDB();
 
+//====================================== enabling CORs ========================================//
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 //====================================== registering required routes ========================================//
 require(`./routes/articles.routes`)(app);
 
