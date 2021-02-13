@@ -30,7 +30,6 @@ app.use(bodyParser.json());
 
 // ====================================== db configurations ========================================= //
 mongoose.Promise = global.Promise;
-console.log(db.uri)
 const connectDB = () => {
     mongoose.connect(db.uri, db.options).catch((err) => {
         console.log(`Connection timed out.`);

@@ -20,7 +20,7 @@ exports.all = (req, res) => {
 };
 
 exports.get_category = (req, res) => {
-    articles.find({category: req.params.category_name}).then(docs => {
+    articles.find({category: req.params.category}).then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
@@ -36,7 +36,7 @@ exports.get_category = (req, res) => {
 };
 
 exports.search = (req, res) => {
-    articles.find({title: req.params.search_term}).then(docs => {
+    articles.find({title: req.params.term}).then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
