@@ -55,7 +55,9 @@ require(`./routes/articles.routes`)(app);
 
 // if the given route is not available print an err.
 app.use(function (req, res) {
-    res.status(404).send('route not found');
+    // res.status(404).send('route not found');
+    //if route is not found redirect to the "/" route
+    res.redirect("/");
 });
 
 // ====================================== app listening port ======================================== //

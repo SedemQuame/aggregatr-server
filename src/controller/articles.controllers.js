@@ -45,13 +45,7 @@ exports.get_category = (req, res) => {
 };
 
 exports.search = (req, res) => {
-    let pagination_page = req.query.page || 0;
-    let pagination_limit = req.query.limit || 20;
-    articles.paginate({title: req.params.term}, {
-        offset: (pagination_page * pagination_limit),
-        limit: pagination_limit
-    }).then((docs) => {
-        // articles.find({title: req.params.term}).then(docs => {
+    articles.find({title: { '$regex' : req.params.term, '$options' : 'i' }}).then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
