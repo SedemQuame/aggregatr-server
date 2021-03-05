@@ -1,6 +1,7 @@
 // ===================================== requiring node modules ===================================== //
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const mongooseSimpleRandom = require('mongoose-simple-random');
 const passportLocalMongoose = require('passport-local-mongoose');
 
 // ==================================== document schema=======================================//
@@ -15,6 +16,7 @@ const articleSchema = new mongoose.Schema({
 });
 
 articleSchema.plugin(mongoosePaginate);
+articleSchema.plugin(mongooseSimpleRandom);
 articleSchema.plugin(passportLocalMongoose);
 
 // ==================================== creating schema model =========================================//

@@ -4,16 +4,17 @@ exports.all = (req, res) => {
     let pagination_page = parseInt(req.query.page) || 0;
     let pagination_limit = parseInt(req.query.limit) || 20;
 
-    articles.paginate({}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((docs) => {
-        articles.find({}).limit(8).then(docs2 => {
+    articles.paginate({}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
+        articles.findRandom({}, {}, {limit: 5}, (err, featured) => {
             res.status(200).send({
-                articles: docs,
-                featured: docs2,
+                featured,
+                articles: articleDocs,
                 err: null,
                 msg: null,
             });
-        })
+        });
     }).catch(err => {
+        console.log(err)
         res.status(404).send({
             articles: null,
             err,
