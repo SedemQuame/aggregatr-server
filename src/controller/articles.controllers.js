@@ -5,7 +5,7 @@ exports.all = (req, res) => {
     let pagination_limit = parseInt(req.query.limit) || 20;
 
     articles.paginate({}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
-        articles.findRandom({}, {}, {limit: 5}, (err, featured) => {
+        articles.findRandom({}, {}, {limit: 10}, (err, featured) => {
             res.status(200).send({
                 featured,
                 articles: articleDocs,
