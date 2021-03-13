@@ -2,9 +2,13 @@ const articles = require(`./../models/articles.models`);
 
 exports.all = (req, res) => {
     let pagination_page = parseInt(req.query.page) || 0;
-    let pagination_limit = parseInt(req.query.limit) || 20;
+    let pagination_limit = parseInt(req.query.limit) || 200;
 
-    articles.paginate({}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
+
+    let option = {month: 'long'};
+    let currentMonth = new Intl.DateTimeFormat('en-US', option).format(new Date());
+
+    articles.paginate({storyDate: { '$regex' : currentMonth, '$options' : 'i' }}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
         articles.findRandom({}, {}, {limit: 10}, (err, featured) => {
             res.status(200).send({
                 featured,
