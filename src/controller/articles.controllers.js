@@ -5,11 +5,15 @@ exports.all = (req, res) => {
     let pagination_limit = parseInt(req.query.limit) || 200;
 
 
-    let option = {month: 'long'};
-    let currentMonth = new Intl.DateTimeFormat('en-US', option).format(new Date());
+    let monthOption = {month: 'long'};
+    let allStories = new Intl.DateTimeFormat('en-US', monthOption).format(new Date());
 
-    articles.paginate({storyDate: { '$regex' : currentMonth, '$options' : 'i' }}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
-        articles.findRandom({}, {}, {limit: 10}, (err, featured) => {
+    let dateOption = {day: 'numeric',year: 'numeric', month: 'long'};
+    let featuredStories = new Intl.DateTimeFormat(['ban', 'en-GB'], dateOption).format(new Date());
+
+
+    articles.paginate({storyDate: { '$regex' : allStories, '$options' : 'i' }}, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
+        articles.findRandom({storyDate: { '$regex' : featuredStories, '$options' : 'i' }}, {}, {limit: 10}, (err, featured) => {
             res.status(200).send({
                 featured,
                 articles: articleDocs,
