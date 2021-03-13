@@ -4,12 +4,9 @@ exports.all = (req, res) => {
     let pagination_page = parseInt(req.query.page) || 0;
     let pagination_limit = parseInt(req.query.limit) || 200;
 
-
+    let date = new Date();
     let monthOption = {month: 'long'};
-    let allStories = new Intl.DateTimeFormat('en-US', monthOption).format(new Date());
-
-    let dateOption = {day: 'numeric', year: 'numeric', month: 'long'};
-    let featuredStories = new Intl.DateTimeFormat(['ban', 'en-GB'], dateOption).format(new Date());
+    let allStories = new Intl.DateTimeFormat('en-US', monthOption).format(date);
 
     articles.paginate({
         storyDate: {
@@ -19,7 +16,7 @@ exports.all = (req, res) => {
     }, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
         articles.findRandom({
             storyDate: {
-                '$regex': /^.*?\bMarch\b.*?\b2021\b.*?$/,
+                '$regex': new RegExp(`^.*?\\b${allStories}\\b.*?\\b${date.getFullYear()}\\b.*?$`),
                 '$options': 'i'
             }
         }, {}, {limit: 10}, (err, featured) => {
