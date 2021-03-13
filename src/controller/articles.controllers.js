@@ -9,9 +9,7 @@ exports.all = (req, res) => {
     let allStories = new Intl.DateTimeFormat('en-US', monthOption).format(new Date());
 
     let dateOption = {day: 'numeric', year: 'numeric', month: 'long'};
-    ;
     let featuredStories = new Intl.DateTimeFormat(['ban', 'en-GB'], dateOption).format(new Date());
-
 
     articles.paginate({
         storyDate: {
@@ -19,7 +17,12 @@ exports.all = (req, res) => {
             '$options': 'i'
         }
     }, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
-        articles.findRandom({}, {}, {limit: 10}, (err, featured) => {
+        articles.findRandom({
+            storyDate: {
+                '$regex': /^.*?\bMarch\b.*?\b2021\b.*?$/,
+                '$options': 'i'
+            }
+        }, {}, {limit: 10}, (err, featured) => {
             res.status(200).send({
                 featured,
                 articles: articleDocs,
