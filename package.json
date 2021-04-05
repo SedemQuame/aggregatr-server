@@ -2,10 +2,11 @@
   "name": "aggregator-server",
   "version": "1.0.0",
   "description": "Aggregation news application server, from MongoDb application.",
-  "main": "src/app.js",
+  "main": "src/App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app.js"
+    "start": "node src/App.js",
+    "run": "node src/App.js"
   },
   "repository": {
     "type": "git",

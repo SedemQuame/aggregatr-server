@@ -5,7 +5,7 @@ exports.all = (req, res) => {
     let pagination_limit = parseInt(req.query.limit) || 200;
 
     let date = new Date();
-    let monthOption = {month: 'long'};
+    let monthOption = { month: 'long' };
     let allStories = new Intl.DateTimeFormat('en-US', monthOption).format(date);
 
     articles.paginate({
@@ -13,13 +13,13 @@ exports.all = (req, res) => {
             '$regex': allStories,
             '$options': 'i'
         }
-    }, {offset: (pagination_limit * pagination_page), limit: pagination_limit}).then((articleDocs) => {
+    }, { offset: (pagination_limit * pagination_page), limit: pagination_limit }).then((articleDocs) => {
         articles.findRandom({
             storyDate: {
                 '$regex': new RegExp(`^.*?\\b${allStories}\\b.*?\\b${date.getFullYear()}\\b.*?$`),
                 '$options': 'i'
             }
-        }, {}, {limit: 10}, (err, featured) => {
+        }, {}, { limit: 10 }, (err, featured) => {
             res.status(200).send({
                 featured,
                 articles: articleDocs,
@@ -40,11 +40,10 @@ exports.all = (req, res) => {
 exports.get_category = (req, res) => {
     let pagination_page = req.query.page || 0;
     let pagination_limit = req.query.limit || 20;
-    articles.paginate({category: req.params.category}, {
+    articles.paginate({ category: req.params.category }, {
         offset: (pagination_page * pagination_limit),
         limit: pagination_limit
     }).then((docs) => {
-        // articles.find().then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
@@ -60,7 +59,7 @@ exports.get_category = (req, res) => {
 };
 
 exports.search = (req, res) => {
-    articles.find({title: {'$regex': req.params.term, '$options': 'i'}}).then(docs => {
+    articles.find({ title: { '$regex': req.params.term, '$options': 'i' } }).then(docs => {
         res.status(200).send({
             articles: docs,
             err: null,
