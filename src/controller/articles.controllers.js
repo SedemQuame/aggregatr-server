@@ -9,11 +9,11 @@ exports.all = (req, res) => {
     let allStories = new Intl.DateTimeFormat('en-US', monthOption).format(date);
 
     articles.paginate({
-        storyDate: {
-            '$regex': allStories,
-            '$options': 'i'
-        }
-    }, { offset: (pagination_limit * pagination_page), limit: pagination_limit }).then((articleDocs) => {
+        // storyDate: {
+        //     '$regex': allStories,
+        //     '$options': 'i'
+        // }
+    }, { offset: (pagination_limit * pagination_page), limit: 1000 }).then((articleDocs) => {
         articles.findRandom({
             storyDate: {
                 '$regex': new RegExp(`^.*?\\b${allStories}\\b.*?\\b${date.getFullYear()}\\b.*?$`),
