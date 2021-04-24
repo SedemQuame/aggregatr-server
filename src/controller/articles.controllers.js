@@ -13,7 +13,7 @@ exports.all = (req, res) => {
         //     '$regex': allStories,
         //     '$options': 'i'
         // }
-    }, { offset: (pagination_limit * pagination_page), limit: 1000 }).then((articleDocs) => {
+    }, { offset: (pagination_limit * pagination_page), limit: pagination_limit }).then((articleDocs) => {
         articles.findRandom({
             storyDate: {
                 '$regex': new RegExp(`^.*?\\b${allStories}\\b.*?\\b${date.getFullYear()}\\b.*?$`),
