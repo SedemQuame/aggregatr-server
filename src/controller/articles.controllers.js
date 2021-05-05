@@ -1,5 +1,21 @@
 const articles = require(`./../models/articles.models`);
 
+exports.headlines = (req, res) => {
+    let pagination_page = parseInt(req.query.page) || 0;
+    let pagination_limit = parseInt(req.query.limit) || 12;
+
+    articles.paginate({}, { offset: (pagination_limit * pagination_page), limit: pagination_limit}).then(headlines => {
+        res.status(200).send({
+            headlines
+        });
+    }).catch(err => {
+        res.status(400).send({
+            err,
+            headlines: []
+        });
+    })
+};
+
 exports.all = (req, res) => {
     let pagination_page = parseInt(req.query.page) || 0;
     let pagination_limit = parseInt(req.query.limit) || 200;
