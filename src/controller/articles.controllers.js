@@ -89,3 +89,18 @@ exports.search = (req, res) => {
         });
     });
 };
+
+exports.get_article = (req, res) => {
+    articles.find({_id: req.params._id}).then(article =>  res.status(200).send({
+            article,
+            err: null,
+            msg: null,
+        })
+    ).catch(err => {
+        res.status(404).send({
+            article: null,
+            err: err,
+            msg: null,
+        })
+    })
+};

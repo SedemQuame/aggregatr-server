@@ -14,5 +14,7 @@ module.exports = app => {
     app.route(`/search/:term`)
         .get(articles.search);
 
+    app.route(`/article/:_id`)
+        .get(articles.get_article);
 
 };
