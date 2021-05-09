@@ -104,3 +104,21 @@ exports.get_article = (req, res) => {
         })
     })
 };
+
+exports.popular = (req, res) => {
+    let pagination_page = Math.floor(1 + (Math.random() * 10));
+    let pagination_limit = 12;
+
+    articles.paginate({}, { offset: (pagination_limit * pagination_page), limit: pagination_limit}).then(article =>  res.status(200).send({
+            article,
+            err: null,
+            msg: null,
+        })
+    ).catch(err => {
+        res.status(404).send({
+            article: null,
+            err: err,
+            msg: null,
+        })
+    })
+};

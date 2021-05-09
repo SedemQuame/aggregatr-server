@@ -17,4 +17,6 @@ module.exports = app => {
     app.route(`/article/:_id`)
         .get(articles.get_article);
 
+    app.route(`/popular`)
+        .get(articles.popular);
 };
